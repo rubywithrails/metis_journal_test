@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<% @journals.each do |journal| %>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= journal.title%></h5>
+      <p class="card-text"><%= journal.description%></p>
+      <% if current_user&.id == journal.user_id%>
+        <%= link_to 'Show', journal, class: "card-link" %>
+        <%= link_to 'Edit', edit_journal_path(journal), class: "card-link" %>
+        <%= link_to 'Destroy', journal, method: :delete, data: { confirm: 'Are you sure?' }, class: "card-link" %>
+      <% else%>
+
+        <p class="card-text">Author: <%= journal.user.email%></p>
+      <% end%>
+    </div>  
+  </div>
+<% end %>
+<br>
